@@ -114,6 +114,10 @@ func (ctx *Context) StartSpan(opts ...SpanOption) (*Context, Span) {
 	return WithValue(newCtx, activeSpanContextKey{}, activeSpan), activeSpan
 }
 
+func (ctx *Context) WithSpan(span Span) *Context {
+	return WithValue(ctx, activeSpanContextKey{}, span)
+}
+
 func (ctx *Context) onStartSpan(activeSpan *span) {
 	if len(ctx.onSpanStartHooks) == 0 {
 		return
